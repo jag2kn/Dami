@@ -1,5 +1,5 @@
 #include "CustomApp.h"
-#include "InitialState.h"
+#include "ToroState.h"
 
 void CustomApp::setupInternal(){
 	ofSetFrameRate(60);
@@ -20,8 +20,8 @@ int CustomApp::getStateCount(){
 
 State* CustomApp::createState(int id){
 	switch (id)	{
-		case INITIAL_STATE:
-			return new InitialState(this);
+		case TORO_STATE:
+			return new ToroState(this);
 	}
 	
 	return NULL;

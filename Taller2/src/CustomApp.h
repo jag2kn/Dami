@@ -5,7 +5,7 @@
 
 class CustomApp : public StateMachineApp {
 public:
-	typedef enum{INITIAL_STATE, NUM_STATES} States;
+	typedef enum{TORO_STATE, NUM_STATES} States;
 
 	void setupInternal();
 	void updateInternal();

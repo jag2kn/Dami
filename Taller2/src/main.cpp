@@ -3,5 +3,6 @@
 
 void main(){
 	ofSetupOpenGL(1024, 768, OF_WINDOW);
+	ofSetLogLevel(OF_LOG_VERBOSE);
 	ofRunApp(new CustomApp());
 }
