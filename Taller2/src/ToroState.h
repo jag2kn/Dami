@@ -1,7 +1,7 @@
 #pragma once
 
 #include "State.h"
-#include "ParametricObject.h"
+#include "Torus.h"
 
 class ToroState : public State {
 public:	
@@ -20,7 +20,7 @@ public:
 	void mouseReleased(int x, int y, int button);
 	void mousePressed(int x, int y, int button);
 
-	ParametricObject *obj;
+	Torus *obj;
 protected:
 	string getStateName();
 	void in();

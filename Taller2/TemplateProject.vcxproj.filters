@@ -52,6 +52,15 @@
     <ClCompile Include="src\InitialState.cpp">
       <Filter>src\StateMachine</Filter>
     </ClCompile>
+    <ClCompile Include="src\ParametricObject.cpp">
+      <Filter>src\Objects</Filter>
+    </ClCompile>
+    <ClCompile Include="src\ToroState.cpp">
+      <Filter>src\StateMachine</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Torus.cpp">
+      <Filter>src\Objects</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="src">
@@ -77,6 +86,9 @@
     </Filter>
     <Filter Include="src\StateMachine">
       <UniqueIdentifier>{3aefb21e-289b-4b68-a331-e43993a758ca}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\Objects">
+      <UniqueIdentifier>{6cd6351b-defd-4d33-bd5b-e3fff5408573}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -124,6 +136,15 @@
     </ClInclude>
     <ClInclude Include="src\InitialState.h">
       <Filter>src\StateMachine</Filter>
+    </ClInclude>
+    <ClInclude Include="src\ParametricObject.h">
+      <Filter>src\Objects</Filter>
+    </ClInclude>
+    <ClInclude Include="src\ToroState.h">
+      <Filter>src\StateMachine</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Torus.h">
+      <Filter>src\Objects</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
