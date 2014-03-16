@@ -22,9 +22,20 @@ public:
 			ofFloatColor specularColor, 
 			float shininess, 
 			RenderMode renderMode);
+	void setup();
 
 
 	void generateGrid();
+private:
+	void setLightOri(ofLight &light, ofVec3f rot);
+	ofLight spot;
+    ofLight point;
+    ofLight dir;
+    ofLight amb;
+    ofMaterial material;
+	ofVec3f dir_rot;
+    ofVec3f spot_rot;
+	int aa;
 
 
 protected:

@@ -12,19 +12,26 @@ ofPoint Torus::computePosition(ofPoint point){
 	float theta = point.x*TWO_PI;
 	float phi = point.y*TWO_PI;
 	p.x=cos(theta)*(R+r*cos(phi));
-	p.y=sin(theta)*(R+cos(phi));
+	p.y=sin(theta)*(R+r*cos(phi));
 	p.z=r*sin(phi);
 	return p;
 }
 
 ofPoint Torus::computeNormal(ofPoint point){
-	ofPoint p;
-	float theta = point.x*TWO_PI;
-	float phi = point.y*TWO_PI;
-	p.x = (R+r*cos(phi))*cos(theta)-(R+r*cos(phi))*cos(theta);
-	p.y = (R+r*cos(phi))*sin(theta)-(R+r*cos(phi))*sin(theta);
-	p.z = (r*sin(phi)-r*sin(phi));
+	float x = point.x*TWO_PI;
+	float y= point.y*TWO_PI;
+	ofPoint dT=ofPoint();
 
-	return p;
+	dT.x = (R + r*cos(y))*(-1)*sin(x);
+	dT.y = (R + r*cos(y))*(-1)*sin(x);
+	dT.z = 0;
+
+	ofPoint dF=ofPoint();
+	dF.x = -1*(r*cos(x)*sin(y));
+	dF.y = -1*(r*sin(x)*sin(y));
+	dF.z = r*cos(y);
+
+	return (dT.cross(dF)).getNormalized();
+
 }
 

@@ -2,6 +2,7 @@
 
 #include "State.h"
 #include "Torus.h"
+#include "ofxGui.h"
 
 class ToroState : public State {
 public:	
@@ -21,8 +22,15 @@ public:
 	void mousePressed(int x, int y, int button);
 
 	Torus *obj;
+
+	ofxButton button;
+
+public:
+	void callback();
+
 protected:
 	string getStateName();
 	void in();
 	void out();	
+
 };

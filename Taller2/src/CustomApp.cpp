@@ -1,8 +1,12 @@
 #include "CustomApp.h"
 #include "ToroState.h"
 
+
+
+
 void CustomApp::setupInternal(){
 	ofSetFrameRate(60);
+
 }
 
 void CustomApp::updateInternal(){

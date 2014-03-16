@@ -9,8 +9,13 @@ ToroState::~ToroState(){
 void ToroState::setup(){
 	ofLogError() << "In en ToroState";
 	//obj = new ParametricObject(100, 100);
-	obj = new Torus(100, 100, 500, 100);
+	obj = new Torus(5, 5, 300, 70);
 	obj->generateGrid();
+	obj->setup();
+
+	button.setup("Nombre boton");
+	button.addListener(this, &ToroState::callback);
+
 }
 
 void ToroState::update(){
@@ -26,24 +31,27 @@ void ToroState::draw(){
 	float shininess;
 	RenderMode renderMode;
 
+	button.draw();
+
+
 	position.x=200;
 	position.y=200;
-	ambientColor.r=0.5;
-	ambientColor.g=0.5;
-	ambientColor.b=0;
-	ambientColor.a=0.5;
+	ambientColor.r=0.0;
+	ambientColor.g=0.0;
+	ambientColor.b=1.0;
+	ambientColor.a=1.0;
 
-	diffuseColor.r=0;
-	diffuseColor.g=0.5;
-	diffuseColor.b=0;
-	diffuseColor.a=0.5;
+	diffuseColor.r=0.0;
+	diffuseColor.g=1.0;
+	diffuseColor.b=1.0;
+	diffuseColor.a=1.0;
 
-	specularColor.r=0;
-	specularColor.g=0.5;
-	specularColor.b=.50;
-	specularColor.a=1;
+	specularColor.r=1.0;
+	specularColor.g=0.0;
+	specularColor.b=0.0;
+	specularColor.a=1.0;
 
-	shininess=0.5;
+	shininess=0;
 
 	renderMode = SOLID;
 
@@ -80,5 +88,9 @@ void ToroState::out(){
 
 void ToroState::exit(){
 	delete obj;
+}
 
+
+void ToroState::callback(){
+	ofLogNotice() <<"Saludando desde el boton";
 }

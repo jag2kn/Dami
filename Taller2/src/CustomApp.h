@@ -25,4 +25,11 @@ public:
 
 	void mousePressed(int x, int y, int button);
 	void mouseReleased(int x, int y, int button);		
+
+	
+    float bgColor[4];
+    bool button1;
+    float slider1;
+    ofPoint circlePos;
+
 };
