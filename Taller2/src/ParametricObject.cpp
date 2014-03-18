@@ -16,8 +16,8 @@ ofPoint ParametricObject::computePosition(ofPoint point){
 	ofPoint p;
 	//p.x=500*point.x;
 	//p.y=500*point.y;
-	p.x=300*sin(point.x*TWO_PI);
-	p.y=300*cos(point.y*TWO_PI);
+	p.x=100*point.x;
+	p.y=100*point.y;
 	p.z=0;
 	return p;
 }
@@ -117,7 +117,7 @@ void ParametricObject::draw(
 	int id_uno, id_dos, id_tres;
 	ofPoint p_uno, p_dos, p_tres;
 	ofPoint n_uno, n_dos, n_tres;
-	ofSphere(0,0,0, 80);
+	//ofSphere(0,0,0, 80);
 	int id;
 
 	
@@ -126,53 +126,64 @@ void ParametricObject::draw(
 	luz1.setDiffuseColor(diffuseColor);
 	luz1.setDirectional();
 	luz1.draw();
-	//glBegin(GL_TRIANGLES);
-	glBegin(GL_LINES);
+	glBegin(GL_TRIANGLES);
+
+	aa=1;
+
+	//glBegin(GL_LINES);
+	//glEnable(GL_POINT_SMOOTH);
+	//glBegin(GL_POINTS);
 		int contador=0;
 		//indices.size()
 
 		if (aa==0){
 			ofLogNotice()<<"Indices: "<<indices.size();
 		}
-		for(int i=0;i<indices.size();i++){
+		
+		//for(int i=0;i<3;i++){
+		for(int i=0;i<indices.size();i+=3){
 			
 			if (aa==0){
 				//ofLogNotice()<<contador%3;
 			}
-			switch(contador%3){
-			case 0:
-				id_uno = indices.at(contador);
-				break;
-			case 1:
-				id_dos = indices.at(contador);
-				break;
-			case 2:
-				id_tres = indices.at(contador);
+				id_uno = indices[i];
+				id_dos = indices[i+1];
+				id_tres = indices[i+2];
 
-
-				p_uno=points.at(id_uno);
-				p_dos=points.at(id_dos);
-				p_tres=points.at(id_dos);
-
-				n_uno=normals.at(id_uno);
-				n_dos=normals.at(id_dos);
-				n_tres=normals.at(id_dos);
 				
 				if (aa==0){
-					//ofLogNotice() <<"Punto:  "<<ofToString(id_uno)<<", "<<ofToString(id_dos)<<", "<<ofToString(id_tres);
+					ofLogNotice() <<"Punto:  "<<ofToString(id_uno)<<", "<<ofToString(id_dos)<<", "<<ofToString(id_tres);
+					ofLogNotice() <<"El largo de points es "<<points.at(id_uno);
 				}
 
+				p_uno=points[id_uno];
+				p_dos=points[id_dos];
+				p_tres=points[id_tres];
 
-				glVertex3f(p_uno.x, p_uno.y, p_uno.z);
-				glVertex3f(p_dos.x, p_dos.y, p_dos.z);
-				glVertex3f(p_tres.x, p_tres.y, p_tres.z);
+				n_uno=normals[id_uno];
+				n_dos=normals[id_dos];
+				n_tres=normals[id_tres];
+				
+				if (aa==0){
+					ofLogNotice() <<"Punto:  "<<ofToString(id_uno)<<", "<<ofToString(id_dos)<<", "<<ofToString(id_tres);
+					ofLogNotice() <<"Punto:  "<<ofToString(p_uno)<<", "<<ofToString(p_dos)<<", "<<ofToString(p_tres);
+				}
+
+				/*
+				ofSphere(p_uno.x, p_uno.y, p_uno.z, 2);
+				ofSphere(p_dos.x, p_dos.y, p_dos.z, 2);
+				ofSphere(p_tres.x, p_tres.y, p_tres.z, 2);
+				*/
+
 
 				glNormal3f(n_uno.x, n_uno.y, n_uno.z);
+				glVertex3f(p_uno.x, p_uno.y, p_uno.z);
+
 				glNormal3f(n_dos.x, n_dos.y, n_dos.z);
+				glVertex3f(p_dos.x, p_dos.y, p_dos.z);
+
 				glNormal3f(n_tres.x, n_tres.y, n_tres.z);
-				break;
-			}
-			contador++;			
+				glVertex3f(p_tres.x, p_tres.y, p_tres.z);
 		}
 	aa = 1;
     glEnd();
@@ -180,7 +191,7 @@ void ParametricObject::draw(
 	mesh.drawWireframe();
 	mesh.drawFaces();
 	*/
-    ofSphere(100,0,0, 80);
+    //ofSphere(100,0,0, 80);
 
 	amb.disable();
     dir.disable();
@@ -217,29 +228,62 @@ void ParametricObject::generateGrid(){
 	float xx,yy,zz;
 	float i,j;
 
-	for (j=0;j<1;j+=step_h){
-		for (i=0;i<1;i+=step_w){
-			points.push_back(computePosition(ofPoint(i, j, 0)));
-			normals.push_back(computePosition(ofPoint(i, j, 0)));
+	int contador=0;
+	int contadorIndices=0;
+	std::vector<ofPoint>::iterator it_p;
+	std::vector<ofPoint>::iterator it_n;
+	std::vector<int>::iterator it_i;
+
+	it_p = points.begin();
+	it_n = normals.begin();
+	it_i = indices.begin();
+	float i_sub, j_sub;
+
+	for (j=0;j<h;j++){
+		for (i=0;i<w;i++){
+			i_sub = i/(w-1);
+			j_sub = j/(h-1);
+			it_p = points.insert(it_p, computePosition(ofPoint(i_sub, j_sub, 0)));
+			it_n = normals.insert(it_n, computePosition(ofPoint(i_sub, j_sub, 0)));
+			contador++;
+
+			//ofLogNotice()<<"Punto: "<<i<<" "<<j<<" "<<0<<" -> "<<computePosition(ofPoint(i_sub, j_sub, 0));
+
+		}
+	}
+	for (j=0;j<h-1;j++){
+		for (i=0;i<w-1;i++){
+
 			xx = j*w+i;
 			yy = (j+1)*w+i;
-			zz = (j+1)*w+i+1;
+			zz = (j+1)*w+(i+1);
 			//mesh.addTriangle(xx,yy,zz);
-			indices.push_back(xx);
-			indices.push_back(yy);
-			indices.push_back(zz);
+			it_i = indices.insert(it_i, xx);
+			it_i = indices.insert(it_i, yy);
+			it_i = indices.insert(it_i, zz);
+			//ofLogNotice()<<"Agregando: "<<xx<<" "<<yy<<" "<<zz;
+
 			xx = j*w+i;
-			yy = j*w+i+1;
-			zz = (j+1)*w+i+1;
+			yy = j*w+(i+1);
+			zz = (j+1)*w+(i+1);
 			//mesh.addTriangle(xx,yy,zz);
-			indices.push_back(xx);
-			indices.push_back(yy);
-			indices.push_back(zz);
+			it_i = indices.insert(it_i, xx);
+			it_i = indices.insert(it_i, yy);
+			it_i = indices.insert(it_i, zz);
+			//ofLogNotice()<<"Agregando: "<<xx<<" "<<yy<<" "<<zz;
 
 			//mesh.addVertex(computePosition(ofPoint(i, j, 0)));
 			//mesh.addNormal(computeNormal(ofPoint(i, j, 0)));
         }
     }
+	/*
+	ofLogNotice()<<"La cantidad de puntos es: "<<points.size();
+	for(int i=0;i<points.size();i++){
+		ofLogNotice()<<"Los puntos son: "<<ofToString(points.at(i));
+	}*/
+	
+	
+	/*
 	for (j=0;j<h-1;j++){
 		for (i=0;i<w-1;i++){
 			xx = j*w+i;
@@ -257,54 +301,64 @@ void ParametricObject::generateGrid(){
 			indices.push_back(yy);
 			indices.push_back(zz);
 		}
-    }
+    }*/
+	
+	/*
+	ofLogNotice()<<"Laterales";
 	for (j=0;j<h-1;j++){
 			xx = j*w;
 			yy = (j+1)*w;
 			zz = (j+1)*w-1;
-			ofLogNotice() <<xx<<","<<yy<<","<<zz;
+			//ofLogNotice() <<xx<<","<<yy<<","<<zz;
 			//mesh.addTriangle(xx,yy,zz);
-			indices.push_back(xx);
-			indices.push_back(yy);
-			indices.push_back(zz);
+			it_i = indices.insert(it_i, xx);
+			it_i = indices.insert(it_i, yy);
+			it_i = indices.insert(it_i, zz);
+			ofLogNotice()<<"Agregando borde: "<<xx<<" "<<yy<<" "<<zz;
 			xx = (j+1)*w;
 			yy = (j+1)*w-1;
 			zz = (j+2)*w-1;
 			//mesh.addTriangle(xx,yy,zz);
-			indices.push_back(xx);
-			indices.push_back(yy);
-			indices.push_back(zz);
-			ofLogNotice() <<xx<<","<<yy<<","<<zz;
+			it_i = indices.insert(it_i, xx);
+			it_i = indices.insert(it_i, yy);
+			it_i = indices.insert(it_i, zz);
+			ofLogNotice()<<"Agregando borde: "<<xx<<" "<<yy<<" "<<zz;
+			//ofLogNotice() <<xx<<","<<yy<<","<<zz;
 	}
+	ofLogNotice()<<"Superior";
 	for (i=0;i<w-1;i++){
 			xx = i;
 			yy = i+1;
 			zz = i+w*(h-1);
-			ofLogNotice() <<xx<<","<<yy<<","<<zz;
 			//mesh.addTriangle(xx,yy,zz);
-			indices.push_back(xx);
-			indices.push_back(yy);
-			indices.push_back(zz);
-			xx = i+w*(h-1);
-			yy = (i+1)+w*(h-1);
-			zz = i+1;
+			it_i = indices.insert(it_i, xx);
+			it_i = indices.insert(it_i, yy);
+			it_i = indices.insert(it_i, zz);
+			ofLogNotice()<<"Agregando borde: "<<xx<<" "<<yy<<" "<<zz;
+			xx = (i+1)+w*(h-1);
+			yy = i+1;
+			zz = i+w*(h-1);
 			//mesh.addTriangle(xx,yy,zz);
-			indices.push_back(xx);
-			indices.push_back(yy);
-			indices.push_back(zz);
-			ofLogNotice() <<xx<<","<<yy<<","<<zz;
-	}
+			it_i = indices.insert(it_i, xx);
+			it_i = indices.insert(it_i, yy);
+			it_i = indices.insert(it_i, zz);
+			ofLogNotice()<<"Agregando borde: "<<xx<<" "<<yy<<" "<<zz;
+			//ofLogNotice() <<xx<<","<<yy<<","<<zz;
+	}*/
 
+	/*
+	ofLogNotice()<<"+++++++++++++"<<indices.size();
 	
-	ofLogNotice()<<"+++++++++++++";
-	for(int i=0;i<indices.size()/100;i++){
-		xx = indices.at(i);
+	int iiii=0;
+	for (it_i=indices.begin(); it_i<indices.end(); it_i++){
+		xx = *it_i;
 		ofLogNotice()<<xx;
-		if (i%3==2){
+		if (iiii%3==2){
 			ofLogNotice()<<"-----------";
 		}
+		iiii++;
 	}
-
+	*/
 
 	/*
 	mesh.addNormal( ofVec3f( normals[id].x, normals[id].y, normals[id].z ));

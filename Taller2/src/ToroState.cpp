@@ -8,8 +8,8 @@ ToroState::~ToroState(){
 
 void ToroState::setup(){
 	ofLogError() << "In en ToroState";
-	//obj = new ParametricObject(100, 100);
-	obj = new Torus(5, 5, 300, 70);
+	obj = new ParametricObject(5, 5);
+	//obj = new Torus(100, 100, 300, 70);
 	obj->generateGrid();
 	obj->setup();
 

@@ -21,7 +21,8 @@ public:
 	void mouseReleased(int x, int y, int button);
 	void mousePressed(int x, int y, int button);
 
-	Torus *obj;
+	//Torus *obj;
+	ParametricObject  *obj;
 
 	ofxButton button;
 
