@@ -1,0 +1,138 @@
+#include "SteinerState.h"
+
+SteinerState::SteinerState(StateMachineApp* app) : State(app){	
+}
+
+void SteinerState::setup(){
+	gui.setup();
+	gui.add(ambient.setup("Ambient", ofColor(0), ofColor(0), ofColor(255)));
+	gui.add(diffuse.setup("Diffuse", ofColor(255), ofColor(0), ofColor(255)));
+	gui.add(specular.setup("Specular", ofColor(255), ofColor(0), ofColor(255)));
+	gui.add(shininess.setup("Shininess", 128, 0.1, 128));	
+	gui.add(hCells.setup("rows", 50, 4, 100));
+	gui.add(vCells.setup("cols", 50, 4, 100));
+	gui.add(r.setup("r", 25, 10, 35));
+
+	drawGui = true;
+
+
+	steiner = new Steiner(hCells, vCells, r);
+
+	lastr = r;
+	lastHCells = hCells;
+	lastVCells = vCells;
+
+	xRot = yRot = 0;
+
+
+	renderMode = ParametricObject::SOLID;
+}
+
+void SteinerState::update(){
+}
+
+void SteinerState::draw(){
+	ofBackgroundGradient(ofColor(64), ofColor(0), OF_GRADIENT_BAR);
+	
+	if(lastr != r || lastHCells != hCells || lastVCells != vCells){
+		delete steiner;
+		steiner = new Steiner(hCells, vCells, r);
+	}
+	
+	//glLightModeli(GL_LIGHT_MODEL_TWO_SIDE, GL_TRUE);
+	glEnable(GL_DEPTH_TEST);
+
+	GLfloat ambient[] = {0.0, 0.0, 0.0, 1.0};
+	GLfloat diffuse[] = {1.0, 1.0, 1.0, 1.0};
+	GLfloat specular[] = {1.0, 1.0, 1.0, 1.0};
+	GLfloat position[] = {ofGetWidth(), ofGetHeight(), 0, 1.0};
+
+	glLightfv(GL_LIGHT0, GL_AMBIENT, ambient);
+	glLightfv(GL_LIGHT0, GL_DIFFUSE, diffuse);
+	glLightfv(GL_LIGHT0, GL_SPECULAR, specular);
+	glLightfv(GL_LIGHT0, GL_POSITION, position);
+
+	glEnable(GL_LIGHTING);
+	glEnable(GL_LIGHT0);	
+
+	glEnable(GL_LINE_SMOOTH);
+	glHint(GL_LINE_SMOOTH_HINT, GL_NICEST);
+
+	glEnable(GL_POINT_SMOOTH);
+	glHint(GL_POINT_SMOOTH_HINT, GL_NICEST);
+
+	glPushMatrix();
+	glTranslatef(0, 0, -400);
+	glTranslatef(ofGetWidth() / 2, ofGetHeight() / 2, 0.0);
+	glRotatef(xRot, 1, 0, 0);
+	glRotatef(yRot, 0, 1, 0);
+	glTranslatef(-ofGetWidth() / 2, -ofGetHeight() / 2, 0.0);
+	if(steiner)
+		steiner->draw(ofPoint(ofGetWidth() / 2, ofGetHeight() / 2, -100), 
+		this->ambient,
+		this->diffuse, 
+		this->specular, 
+		shininess, 
+		renderMode);
+	glPopMatrix();
+
+
+	glDisable(GL_LINE_SMOOTH);
+	glDisable(GL_POINT_SMOOTH);
+	glDisable(GL_DEPTH_TEST);
+	glDisable(GL_LIGHTING);
+
+	if(drawGui)
+		gui.draw();
+
+
+	lastr = r;
+	lastHCells = hCells;
+	lastVCells = vCells;
+}
+
+string SteinerState::getStateName(){
+	return "SteinerState";
+}
+
+void SteinerState::keyPressed(int key){
+}
+
+void SteinerState::keyReleased(int key){
+
+
+	if(key == 'l' || key == 'L')
+		renderMode = ParametricObject::WIREFRAME;
+
+	if(key == 's')
+		renderMode = ParametricObject::SOLID;
+
+	if(key == 'p')
+		renderMode = ParametricObject::POINTS;
+}
+
+void SteinerState::mouseMoved(int x, int y ){
+}
+
+void SteinerState::mousePressed(int x, int y, int button){
+	xRot = y / (float)ofGetHeight() * 360;
+	yRot = x / (float)ofGetWidth() * 360;
+}
+
+void SteinerState::mouseReleased(int x, int y, int button){
+}
+
+void SteinerState::mouseDragged(int x, int y, int button){
+	xRot = y / (float)ofGetHeight() * 360;
+	yRot = x / (float)ofGetWidth() * 360;
+}
+
+void SteinerState::in(){
+}
+
+void SteinerState::out(){
+}
+
+void SteinerState::exit(){
+	delete steiner;
+}
