@@ -18,7 +18,9 @@ ofPoint Sinusoidal::computePosition(ofPoint point){
 
 	//ofLog()<<"["<<<<","<<",]"
 
-	destino.z = sin(p*TWO_PI*sqrt(pow(point.x-0.5,2)+pow(point.y-0.5,2)))*a;
+	destino.z = sin(
+			p*
+			TWO_PI*sqrt(pow(point.x-0.5,2)+pow(point.y-0.5,2)))*a;
 
 
 	return destino;
