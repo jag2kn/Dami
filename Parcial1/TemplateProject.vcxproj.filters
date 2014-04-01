@@ -61,6 +61,24 @@
     <ClCompile Include="src\TransformationsState.cpp">
       <Filter>src\StateMachine</Filter>
     </ClCompile>
+    <ClCompile Include="src\SteinerState.cpp">
+      <Filter>src\StateMachine</Filter>
+    </ClCompile>
+    <ClCompile Include="src\CubetaHuevosState.cpp">
+      <Filter>src\StateMachine</Filter>
+    </ClCompile>
+    <ClCompile Include="src\ElipsesConcentricasState.cpp">
+      <Filter>src\StateMachine</Filter>
+    </ClCompile>
+    <ClCompile Include="src\SuperficieSinusoidalState.cpp">
+      <Filter>src\StateMachine</Filter>
+    </ClCompile>
+    <ClCompile Include="src\ToroParticulasState.cpp">
+      <Filter>src\StateMachine</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Steiner.cpp">
+      <Filter>src\Objects</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="src">
@@ -145,6 +163,24 @@
     </ClInclude>
     <ClInclude Include="src\TransformationsState.h">
       <Filter>src\StateMachine</Filter>
+    </ClInclude>
+    <ClInclude Include="src\SteinerState.h">
+      <Filter>src\StateMachine</Filter>
+    </ClInclude>
+    <ClInclude Include="src\CubetaHuevosState.h">
+      <Filter>src\StateMachine</Filter>
+    </ClInclude>
+    <ClInclude Include="src\ElipsesConcentricasState.h">
+      <Filter>src\StateMachine</Filter>
+    </ClInclude>
+    <ClInclude Include="src\SuperficieSinusoidalState.h">
+      <Filter>src\StateMachine</Filter>
+    </ClInclude>
+    <ClInclude Include="src\ToroParticulasState.h">
+      <Filter>src\StateMachine</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Steiner.h">
+      <Filter>src\Objects</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

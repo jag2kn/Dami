@@ -90,6 +90,8 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="src\CubetaHuevosState.cpp" />
+    <ClCompile Include="src\ElipsesConcentricasState.cpp" />
     <ClCompile Include="src\InitialState.cpp" />
     <ClCompile Include="src\main.cpp" />
     <ClCompile Include="src\ParametricObject.cpp" />
@@ -108,10 +110,16 @@
     <ClCompile Include="..\..\..\addons\ofxXmlSettings\libs\tinyxml.cpp" />
     <ClCompile Include="..\..\..\addons\ofxXmlSettings\libs\tinyxmlerror.cpp" />
     <ClCompile Include="..\..\..\addons\ofxXmlSettings\libs\tinyxmlparser.cpp" />
+    <ClCompile Include="src\Steiner.cpp" />
+    <ClCompile Include="src\SteinerState.cpp" />
+    <ClCompile Include="src\SuperficieSinusoidalState.cpp" />
+    <ClCompile Include="src\ToroParticulasState.cpp" />
     <ClCompile Include="src\Torus.cpp" />
     <ClCompile Include="src\TransformationsState.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="src\CubetaHuevosState.h" />
+    <ClInclude Include="src\ElipsesConcentricasState.h" />
     <ClInclude Include="src\InitialState.h" />
     <ClInclude Include="src\ParametricObject.h" />
     <ClInclude Include="src\State.h" />
@@ -128,6 +136,10 @@
     <ClInclude Include="..\..\..\addons\ofxGui\src\ofxToggle.h" />
     <ClInclude Include="..\..\..\addons\ofxXmlSettings\src\ofxXmlSettings.h" />
     <ClInclude Include="..\..\..\addons\ofxXmlSettings\libs\tinyxml.h" />
+    <ClInclude Include="src\Steiner.h" />
+    <ClInclude Include="src\SteinerState.h" />
+    <ClInclude Include="src\SuperficieSinusoidalState.h" />
+    <ClInclude Include="src\ToroParticulasState.h" />
     <ClInclude Include="src\Torus.h" />
     <ClInclude Include="src\TransformationsState.h" />
   </ItemGroup>
