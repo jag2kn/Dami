@@ -4,24 +4,45 @@ SuperficieSinusoidalState::SuperficieSinusoidalState(StateMachineApp* app) : Sta
 }
 
 void SuperficieSinusoidalState::setup(){
+	gui.setup();
+	gui.add(ambient.setup("Ambient", ofColor(0), ofColor(0), ofColor(255)));
+	gui.add(diffuse.setup("Diffuse", ofColor(255), ofColor(0), ofColor(255)));
+	gui.add(specular.setup("Specular", ofColor(255), ofColor(0), ofColor(255)));
+	gui.add(shininess.setup("Shininess", 128, 0.1, 128));	
+	gui.add(hCells.setup("rows", 50, 4, 100));
+	gui.add(vCells.setup("cols", 50, 4, 100));
+	gui.add(a.setup("Amplitud", 25, 20, 100));
+	gui.add(p.setup("Periodos", 2, 1, 20));
+
+	drawGui = true;
+
+
+
+	sinusoidal = new Sinusoidal(20, 20, 200, 80);
 	
+	lasta = a;
+	lastp = p;
+	lastHCells = hCells;
+	lastVCells = vCells;
 
-	torus = new Torus(20, 20, 200, 80);
+	xRot = yRot = 0;
 
-	delta = 0;
-	direccioncolor = 1;
+
 	renderMode = ParametricObject::SOLID;
 }
 
 void SuperficieSinusoidalState::update(){
-	delta = (ofGetElapsedTimeMillis()%1000)/1000.0;
+
 }
 
 void SuperficieSinusoidalState::draw(){
+	
 	ofBackgroundGradient(ofColor(64), ofColor(0), OF_GRADIENT_BAR);
 	
-	
-
+	if(lasta != a || lastp != p || lastHCells != hCells || lastVCells != vCells){
+		delete sinusoidal;
+		sinusoidal = new Sinusoidal(hCells, vCells, a, p);
+	}
 	glEnable(GL_DEPTH_TEST);
 
 	GLfloat ambient[] = {0.0, 0.0, 0.0, 1.0};
@@ -42,99 +63,22 @@ void SuperficieSinusoidalState::draw(){
 
 	glEnable(GL_POINT_SMOOTH);
 	glHint(GL_POINT_SMOOTH_HINT, GL_NICEST);
-
-	/*
-	if (delta==0){
-		direccioncolor*=-1;
-	}*/
-
-	ofFloatColor amb, dif, spe;
-	float shi;
-	amb.r=0.0;
-	amb.g=0.0;
-	amb.b=0.0;
-	dif.r=1.0*abs(2*(delta-delta/2));
-	dif.g=0.0;
-	dif.b=1.0;
-	spe.r=1;
-	spe.g=1;
-	spe.b=1;
-	shi = 10;
-
-	ofFloatColor amb2, dif2, spe2;
-	float shi2;
-	amb2.r=0.0;
-	amb2.g=0.0;
-	amb2.b=0.0;
-	dif2.g=0.0;
-	dif2.r=1.0*abs(2*(delta-delta/2));
-	dif2.b=1.0;
-	spe2.r=1;
-	spe2.g=1;
-	spe2.b=1;
-	shi2 = 10;
-
-
-	float rotacion1 =360.0*delta;
-	float rotacion2 =2.0*360.0*delta;
-	int n=3, n_i;
-	int m=8, m_j;
-	float dato_escala;
-	float dato_rotacion;
-	float angulo_desfase=5;
-
-
-	// Pintado de toro central
-	//camara.begin();
-
-	glTranslatef(0.0, 0.0, -500.0);
+	
 	glPushMatrix();
-		//glTranslatef(0, 0, -400);
-		glTranslatef(ofGetWidth() / 2, ofGetHeight() / 2, 0.0);
-		glRotatef(90, 1, 0, 0);
-		glRotatef(rotacion1, 0, 0, 1);
-		dato_escala=0.8;
-		glScalef(dato_escala,dato_escala,dato_escala);
-		glTranslatef(-ofGetWidth() / 2, -ofGetHeight() / 2, 0.0);
-		torus->draw(ofPoint(ofGetWidth() / 2, ofGetHeight() / 2, 0), amb2,dif2, spe2, shi2, renderMode);
+	glTranslatef(0, 0, -400);
+	glTranslatef(ofGetWidth() / 2, ofGetHeight() / 2, 0.0);
+	glRotatef(xRot, 1, 0, 0);
+	glRotatef(yRot, 0, 1, 0);
+	glTranslatef(-ofGetWidth() / 2, -ofGetHeight() / 2, 0.0);
+	glTranslatef(-1000, -1000, 0.0);
+	if(sinusoidal)
+		sinusoidal->draw(ofPoint(ofGetWidth() / 2, ofGetHeight() / 2, -100), 
+		this->ambient,
+		this->diffuse, 
+		this->specular, 
+		shininess, 
+		renderMode);
 	glPopMatrix();
-
-	glPushMatrix();
-		//glTranslatef(0, 0, -400);
-		//glTranslatef(ofGetWidth() / 2, ofGetHeight() / 2, 0.0);
-		//glRotatef(90, 1, 0, 0);
-		//glRotatef(rotacion1, 0, 0, 1);
-		for(int j=0;j<m;j++){
-			dato_rotacion = 360.0*((float)j/m);
-			glTranslatef(ofGetWidth() / 2, ofGetHeight() / 2, 0.0);
-			glRotatef(dato_rotacion, 0, 0, 1);
-			glTranslatef(-ofGetWidth() / 2, -ofGetHeight() / 2, 0.0);
-			for(int i=1;i<=n;i++){
-				glRotatef(i*angulo_desfase, 0, 0, 1);
-				glPushMatrix();
-					dato_escala = 0.2-(float)i/n/10;
-					//ofLogNotice()<<i<<", "<<n<<"<--4----\t"<<dato_rotacion<<"\t----> "<<n-i;
-					glTranslatef(200+100*(i), 0.0, 0.0);
-
-					glTranslatef(ofGetWidth() / 2, ofGetHeight() / 2, 0.0);
-					glRotatef(-90, 1, 0, 0);
-					glRotatef(360.0*delta, 0, 1, 0);
-					glScalef(dato_escala,dato_escala,dato_escala);
-					glTranslatef(-ofGetWidth() / 2, -ofGetHeight() / 2, 0.0);
-
-
-					torus->draw(ofPoint(ofGetWidth() / 2, ofGetHeight() / 2, 0), amb,dif, spe, shi, renderMode);
-				
-				glPopMatrix();
-				glRotatef(-i*angulo_desfase, 0, 0, 1);
-			}
-			glTranslatef(ofGetWidth() / 2, ofGetHeight() / 2, 0.0);
-			glRotatef(-dato_rotacion, 0, 0, 1);
-			glTranslatef(-ofGetWidth() / 2, -ofGetHeight() / 2, 0.0);
-		}
-		//glTranslatef(-ofGetWidth() / 2, -ofGetHeight() / 2, 0.0);
-	glPopMatrix();
-
 	
 	//camara.end();
 
@@ -143,6 +87,14 @@ void SuperficieSinusoidalState::draw(){
 	glDisable(GL_POINT_SMOOTH);
 	glDisable(GL_DEPTH_TEST);
 	glDisable(GL_LIGHTING);
+	if(drawGui)
+		gui.draw();
+
+
+	lasta = a;
+	lastp = p;
+	lastHCells = hCells;
+	lastVCells = vCells;
 
 }
 
@@ -170,12 +122,16 @@ void SuperficieSinusoidalState::mouseMoved(int x, int y ){
 }
 
 void SuperficieSinusoidalState::mousePressed(int x, int y, int button){
+	xRot = y / (float)ofGetHeight() * 360;
+	yRot = x / (float)ofGetWidth() * 360;
 }
 
 void SuperficieSinusoidalState::mouseReleased(int x, int y, int button){
 }
 
 void SuperficieSinusoidalState::mouseDragged(int x, int y, int button){
+	xRot = y / (float)ofGetHeight() * 360;
+	yRot = x / (float)ofGetWidth() * 360;
 }
 
 void SuperficieSinusoidalState::in(){
@@ -185,5 +141,5 @@ void SuperficieSinusoidalState::out(){
 }
 
 void SuperficieSinusoidalState::exit(){
-	delete torus;
+	delete sinusoidal;
 }

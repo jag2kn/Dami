@@ -79,6 +79,9 @@
     <ClCompile Include="src\Steiner.cpp">
       <Filter>src\Objects</Filter>
     </ClCompile>
+    <ClCompile Include="src\Sinusoidal.cpp">
+      <Filter>src\Objects</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="src">
@@ -180,6 +183,9 @@
       <Filter>src\StateMachine</Filter>
     </ClInclude>
     <ClInclude Include="src\Steiner.h">
+      <Filter>src\Objects</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Sinusoidal.h">
       <Filter>src\Objects</Filter>
     </ClInclude>
   </ItemGroup>

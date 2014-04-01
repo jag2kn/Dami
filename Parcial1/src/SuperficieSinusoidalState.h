@@ -2,7 +2,7 @@
 
 #include "State.h"
 
-#include "Torus.h"
+#include "Sinusoidal.h"
 
 #include "ofxGui.h"
 #include "ofxPanel.h"
@@ -30,9 +30,18 @@ protected:
 	void out();
 	
 	ofEasyCam camara;
-	Torus							*torus;
+	Sinusoidal						*sinusoidal;
+	
+	ofxPanel						gui;
+	ofxFloatColorSlider				ambient, diffuse, specular;
+	ofxIntSlider					hCells, vCells, a, p;		
+	ofxFloatSlider					shininess;
 
-	int								direccioncolor;
-	float							delta;
+	bool							drawGui;
+
+	int lasta, lastp;
+	float							lastHCells, lastVCells;
+
+	float							xRot, yRot;
 	ParametricObject::RenderMode	renderMode;
 };

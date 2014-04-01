@@ -95,6 +95,7 @@
     <ClCompile Include="src\InitialState.cpp" />
     <ClCompile Include="src\main.cpp" />
     <ClCompile Include="src\ParametricObject.cpp" />
+    <ClCompile Include="src\Sinusoidal.cpp" />
     <ClCompile Include="src\State.cpp" />
     <ClCompile Include="src\StateMachineApp.cpp" />
     <ClCompile Include="src\CustomApp.cpp" />
@@ -122,6 +123,7 @@
     <ClInclude Include="src\ElipsesConcentricasState.h" />
     <ClInclude Include="src\InitialState.h" />
     <ClInclude Include="src\ParametricObject.h" />
+    <ClInclude Include="src\Sinusoidal.h" />
     <ClInclude Include="src\State.h" />
     <ClInclude Include="src\StateMachineApp.h" />
     <ClInclude Include="src\CustomApp.h" />
