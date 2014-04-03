@@ -319,8 +319,9 @@ obj/linux64/Release/src/CustomApp.o: src/CustomApp.cpp src/CustomApp.h \
  ../../../addons/ofxGui/src/ofxButton.h \
  ../../../addons/ofxGui/src/ofxPanel.h \
  ../../../addons/ofxGui/src/ofxLabel.h src/SteinerState.h src/Steiner.h \
- src/SuperficieSinusoidalState.h src/ElipsesConcentricasState.h \
- src/CubetaHuevosState.h src/ToroParticulasState.h
+ src/SuperficieSinusoidalState.h src/Sinusoidal.h \
+ src/ElipsesConcentricasState.h src/CubetaHuevosState.h \
+ src/ToroParticulasState.h
 
 src/CustomApp.h:
 
@@ -1009,6 +1010,8 @@ src/SteinerState.h:
 src/Steiner.h:
 
 src/SuperficieSinusoidalState.h:
+
+src/Sinusoidal.h:
 
 src/ElipsesConcentricasState.h:
 

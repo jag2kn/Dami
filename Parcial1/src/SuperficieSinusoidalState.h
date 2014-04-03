@@ -39,8 +39,8 @@ protected:
 
 	bool							drawGui;
 
-	int lasta, lastp;
-	float							lastHCells, lastVCells;
+	int								lasta, lastp;
+	float							lastHCells, lastVCells, lastDelta, delta;
 
 	float							xRot, yRot;
 	ParametricObject::RenderMode	renderMode;

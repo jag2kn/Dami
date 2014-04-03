@@ -310,7 +310,8 @@ obj/linux64/Release/src/SuperficieSinusoidalState.o: \
  ../../../libs/openFrameworks/video/ofGstVideoPlayer.h \
  ../../../libs/openFrameworks/3d/ofCamera.h \
  ../../../libs/openFrameworks/3d/ofEasyCam.h src/StateMachineApp.h \
- src/Torus.h src/ParametricObject.h ../../../addons/ofxGui/src/ofxGui.h \
+ src/Sinusoidal.h src/ParametricObject.h \
+ ../../../addons/ofxGui/src/ofxGui.h \
  ../../../addons/ofxGui/src/ofxToggle.h \
  ../../../addons/ofxGui/src/ofxBaseGui.h \
  ../../../addons/ofxGui/src/ofxSlider.h \
@@ -978,7 +979,7 @@ src/State.h:
 
 src/StateMachineApp.h:
 
-src/Torus.h:
+src/Sinusoidal.h:
 
 src/ParametricObject.h:
 

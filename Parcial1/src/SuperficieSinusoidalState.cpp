@@ -12,36 +12,40 @@ void SuperficieSinusoidalState::setup(){
 	gui.add(hCells.setup("rows", 50, 4, 100));
 	gui.add(vCells.setup("cols", 50, 4, 100));
 	gui.add(a.setup("Amplitud", 25, 20, 100));
-	gui.add(p.setup("Periodos", 2, 1, 20));
+	gui.add(p.setup("Periodos", 3, 1, 20));
 
 	drawGui = true;
 
 
 
-	sinusoidal = new Sinusoidal(20, 20, 200, 80);
+	sinusoidal = new Sinusoidal(20, 20, 25, 3, 0);
 	
 	lasta = a;
 	lastp = p;
+	lastDelta = 0;
 	lastHCells = hCells;
 	lastVCells = vCells;
 
 	xRot = yRot = 0;
 
 
-	renderMode = ParametricObject::SOLID;
+	renderMode = ParametricObject::WIREFRAME;
 }
 
 void SuperficieSinusoidalState::update(){
-
+	delta = (float)(ofGetElapsedTimeMillis()%1000)/1000;
+	//ofLogNotice()<<"Delta update :"<<delta<<" - "<<ofGetElapsedTimeMillis();
 }
 
 void SuperficieSinusoidalState::draw(){
+
 	
 	ofBackgroundGradient(ofColor(64), ofColor(0), OF_GRADIENT_BAR);
 	
-	if(lasta != a || lastp != p || lastHCells != hCells || lastVCells != vCells){
+	//ofLog()<<"Delta draw: "<<delta;
+	if(lasta != a || lastp != p || lastHCells != hCells || lastVCells != vCells || lastDelta !=delta){
 		delete sinusoidal;
-		sinusoidal = new Sinusoidal(hCells, vCells, a, p);
+		sinusoidal = new Sinusoidal(hCells, vCells, a, p, delta);
 	}
 	glEnable(GL_DEPTH_TEST);
 
@@ -63,6 +67,9 @@ void SuperficieSinusoidalState::draw(){
 
 	glEnable(GL_POINT_SMOOTH);
 	glHint(GL_POINT_SMOOTH_HINT, GL_NICEST);
+	
+	//ofEnableBlendMode(OF_BLENDMODE_ADD);
+
 	
 	glPushMatrix();
 	glTranslatef(0, 0, -400);
@@ -93,6 +100,7 @@ void SuperficieSinusoidalState::draw(){
 
 	lasta = a;
 	lastp = p;
+	lastDelta = delta;
 	lastHCells = hCells;
 	lastVCells = vCells;
 

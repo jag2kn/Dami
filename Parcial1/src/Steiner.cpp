@@ -20,7 +20,7 @@ ofPoint Steiner::computePosition(ofPoint point){
 }
 
 ofPoint Steiner::computeNormal(ofPoint point){
-	float theta = point.x * PI * 0.5, phi = point.y * TWO_PI;
+	float theta = point.x * PI*0.5 , phi = point.y * TWO_PI;
 	float r = getSmallR(phi, theta/*, 10, 20, 0*/);
 
 	ofPoint dTheta = ofPoint(

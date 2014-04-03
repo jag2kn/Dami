@@ -2,14 +2,14 @@
 
 #include "State.h"
 
-#include "Torus.h"
+#include "Sinusoidal.h"
 
 #include "ofxGui.h"
 #include "ofxPanel.h"
 
-class TransformationsState : public State {
+class SuperficieSinusoidalState : public State {
 public:	
-	TransformationsState(StateMachineApp* app);
+	SuperficieSinusoidalState(StateMachineApp* app);
 	
 	void setup();
 	void update();
@@ -30,9 +30,18 @@ protected:
 	void out();
 	
 	ofEasyCam camara;
-	Torus							*torus;
+	Sinusoidal						*sinusoidal;
+	
+	ofxPanel						gui;
+	ofxFloatColorSlider				ambient, diffuse, specular;
+	ofxIntSlider					hCells, vCells, a, p;		
+	ofxFloatSlider					shininess;
 
-	int								direccioncolor;
-	float							delta;
+	bool							drawGui;
+
+	int								lasta, lastp, delta, lastDelta;
+	float							lastHCells, lastVCells;
+
+	float							xRot, yRot;
 	ParametricObject::RenderMode	renderMode;
 };

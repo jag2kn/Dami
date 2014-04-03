@@ -1,8 +1,9 @@
 #include "Sinusoidal.h"
 
-Sinusoidal::Sinusoidal(int w, int h, int a, int p) : ParametricObject(w, h) {
+Sinusoidal::Sinusoidal(int w, int h, int a, int p, float delta) : ParametricObject(w, h) {
 	this->p = p;
 	this->a = a;
+	this->delta = delta;
 }
 
 
@@ -18,7 +19,7 @@ ofPoint Sinusoidal::computePosition(ofPoint point){
 
 	//ofLog()<<"["<<<<","<<",]"
 
-	destino.z = sin(
+	destino.z = sin(TWO_PI*delta+
 			p*
 			TWO_PI*sqrt(pow(point.x-0.5,2)+pow(point.y-0.5,2)))*a;
 
@@ -43,8 +44,9 @@ ofPoint Sinusoidal::computeNormal(ofPoint point){
 	*/
 	ofPoint normal ;
 	normal.x =0;
-	normal.y =-1;
-	normal.z =0;
+	normal.y =0;
+	normal.z =cos(TWO_PI*delta+
+			p*TWO_PI*sqrt(pow(point.x-0.5,2)+pow(point.y-0.5,2)));
 
 	return normal;
 }
