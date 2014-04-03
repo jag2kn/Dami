@@ -310,7 +310,7 @@ obj/linux64/Release/src/ElipsesConcentricasState.o: \
  ../../../libs/openFrameworks/video/ofGstVideoPlayer.h \
  ../../../libs/openFrameworks/3d/ofCamera.h \
  ../../../libs/openFrameworks/3d/ofEasyCam.h src/StateMachineApp.h \
- src/Torus.h src/ParametricObject.h ../../../addons/ofxGui/src/ofxGui.h \
+ src/Elipse.h src/ParametricObject.h ../../../addons/ofxGui/src/ofxGui.h \
  ../../../addons/ofxGui/src/ofxToggle.h \
  ../../../addons/ofxGui/src/ofxBaseGui.h \
  ../../../addons/ofxGui/src/ofxSlider.h \
@@ -978,7 +978,7 @@ src/State.h:
 
 src/StateMachineApp.h:
 
-src/Torus.h:
+src/Elipse.h:
 
 src/ParametricObject.h:
 

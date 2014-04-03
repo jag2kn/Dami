@@ -2,14 +2,14 @@
 
 #include "State.h"
 
-#include "Torus.h"
+#include "Elipse.h"
 
 #include "ofxGui.h"
 #include "ofxPanel.h"
 
-class TransformationsState : public State {
+class ElipsesConcentricasState : public State {
 public:	
-	TransformationsState(StateMachineApp* app);
+	ElipsesConcentricasState(StateMachineApp* app);
 	
 	void setup();
 	void update();
@@ -25,12 +25,15 @@ public:
 	void mouseDragged(int x, int y, int button);
 		
 protected:
+
+	
 	string getStateName();
 	void in();
 	void out();
 	
 	ofEasyCam camara;
-	Torus							*torus;
+	Elipse							*elipses;
+	int cantidadElipses;
 
 	int								direccioncolor;
 	float							delta;

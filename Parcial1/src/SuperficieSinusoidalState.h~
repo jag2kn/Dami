@@ -30,7 +30,7 @@ protected:
 	void out();
 	
 	ofEasyCam camara;
-	Sinusoidal						*sinusoidal;
+	Elipse						*elipse;
 	
 	ofxPanel						gui;
 	ofxFloatColorSlider				ambient, diffuse, specular;
@@ -39,8 +39,8 @@ protected:
 
 	bool							drawGui;
 
-	int								lasta, lastp, delta, lastDelta;
-	float							lastHCells, lastVCells;
+	int								lasta, lastp;
+	float							lastHCells, lastVCells, lastDelta, delta;
 
 	float							xRot, yRot;
 	ParametricObject::RenderMode	renderMode;

@@ -5,9 +5,6 @@ ElipsesConcentricasState::ElipsesConcentricasState(StateMachineApp* app) : State
 
 void ElipsesConcentricasState::setup(){
 	
-
-	torus = new Torus(20, 20, 200, 80);
-
 	delta = 0;
 	direccioncolor = 1;
 	renderMode = ParametricObject::SOLID;
@@ -83,58 +80,6 @@ void ElipsesConcentricasState::draw(){
 	float dato_rotacion;
 	float angulo_desfase=5;
 
-
-	// Pintado de toro central
-	//camara.begin();
-
-	glTranslatef(0.0, 0.0, -500.0);
-	glPushMatrix();
-		//glTranslatef(0, 0, -400);
-		glTranslatef(ofGetWidth() / 2, ofGetHeight() / 2, 0.0);
-		glRotatef(90, 1, 0, 0);
-		glRotatef(rotacion1, 0, 0, 1);
-		dato_escala=0.8;
-		glScalef(dato_escala,dato_escala,dato_escala);
-		glTranslatef(-ofGetWidth() / 2, -ofGetHeight() / 2, 0.0);
-		torus->draw(ofPoint(ofGetWidth() / 2, ofGetHeight() / 2, 0), amb2,dif2, spe2, shi2, renderMode);
-	glPopMatrix();
-
-	glPushMatrix();
-		//glTranslatef(0, 0, -400);
-		//glTranslatef(ofGetWidth() / 2, ofGetHeight() / 2, 0.0);
-		//glRotatef(90, 1, 0, 0);
-		//glRotatef(rotacion1, 0, 0, 1);
-		for(int j=0;j<m;j++){
-			dato_rotacion = 360.0*((float)j/m);
-			glTranslatef(ofGetWidth() / 2, ofGetHeight() / 2, 0.0);
-			glRotatef(dato_rotacion, 0, 0, 1);
-			glTranslatef(-ofGetWidth() / 2, -ofGetHeight() / 2, 0.0);
-			for(int i=1;i<=n;i++){
-				glRotatef(i*angulo_desfase, 0, 0, 1);
-				glPushMatrix();
-					dato_escala = 0.2-(float)i/n/10;
-					//ofLogNotice()<<i<<", "<<n<<"<--4----\t"<<dato_rotacion<<"\t----> "<<n-i;
-					glTranslatef(200+100*(i), 0.0, 0.0);
-
-					glTranslatef(ofGetWidth() / 2, ofGetHeight() / 2, 0.0);
-					glRotatef(-90, 1, 0, 0);
-					glRotatef(360.0*delta, 0, 1, 0);
-					glScalef(dato_escala,dato_escala,dato_escala);
-					glTranslatef(-ofGetWidth() / 2, -ofGetHeight() / 2, 0.0);
-
-
-					torus->draw(ofPoint(ofGetWidth() / 2, ofGetHeight() / 2, 0), amb,dif, spe, shi, renderMode);
-				
-				glPopMatrix();
-				glRotatef(-i*angulo_desfase, 0, 0, 1);
-			}
-			glTranslatef(ofGetWidth() / 2, ofGetHeight() / 2, 0.0);
-			glRotatef(-dato_rotacion, 0, 0, 1);
-			glTranslatef(-ofGetWidth() / 2, -ofGetHeight() / 2, 0.0);
-		}
-		//glTranslatef(-ofGetWidth() / 2, -ofGetHeight() / 2, 0.0);
-	glPopMatrix();
-
 	
 	//camara.end();
 
@@ -185,5 +130,4 @@ void ElipsesConcentricasState::out(){
 }
 
 void ElipsesConcentricasState::exit(){
-	delete torus;
 }

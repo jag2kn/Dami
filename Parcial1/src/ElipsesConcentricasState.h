@@ -2,7 +2,7 @@
 
 #include "State.h"
 
-#include "Torus.h"
+#include "Elipse.h"
 
 #include "ofxGui.h"
 #include "ofxPanel.h"
@@ -25,12 +25,15 @@ public:
 	void mouseDragged(int x, int y, int button);
 		
 protected:
+
+	
 	string getStateName();
 	void in();
 	void out();
 	
 	ofEasyCam camara;
-	Torus							*torus;
+	Elipse							**elipses;
+	int cantidadElipses;
 
 	int								direccioncolor;
 	float							delta;
