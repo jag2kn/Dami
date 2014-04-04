@@ -2,7 +2,6 @@
 
 #include "State.h"
 
-#include "Elipse.h"
 
 #include "ofxGui.h"
 #include "ofxPanel.h"
@@ -32,10 +31,9 @@ protected:
 	void out();
 	
 	ofEasyCam camara;
-	Elipse							**elipses;
 	int cantidadElipses;
 
 	int								direccioncolor;
 	float							delta;
-	ParametricObject::RenderMode	renderMode;
+
 };

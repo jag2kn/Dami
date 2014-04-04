@@ -135,6 +135,7 @@ obj/linux64/Release/src/CustomApp.o: src/CustomApp.cpp src/CustomApp.h \
  ../../../libs/openFrameworks/3d/of3dPrimitives.h \
  ../../../libs/openFrameworks/gl/ofMaterial.h \
  ../../../libs/openFrameworks/gl/ofShader.h \
+ ../../../libs/poco/include/Poco/RegularExpression.h \
  ../../../libs/openFrameworks/app/ofAppBaseWindow.h \
  ../../../libs/openFrameworks/gl/ofGLProgrammableRenderer.h \
  ../../../libs/openFrameworks/graphics/ofCairoRenderer.h \
@@ -320,7 +321,7 @@ obj/linux64/Release/src/CustomApp.o: src/CustomApp.cpp src/CustomApp.h \
  ../../../addons/ofxGui/src/ofxPanel.h \
  ../../../addons/ofxGui/src/ofxLabel.h src/SteinerState.h src/Steiner.h \
  src/SuperficieSinusoidalState.h src/Sinusoidal.h \
- src/ElipsesConcentricasState.h src/Elipse.h src/CubetaHuevosState.h \
+ src/ElipsesConcentricasState.h src/CubetaHuevosState.h \
  src/ToroParticulasState.h
 
 src/CustomApp.h:
@@ -596,6 +597,8 @@ src/CustomApp.h:
 ../../../libs/openFrameworks/gl/ofMaterial.h:
 
 ../../../libs/openFrameworks/gl/ofShader.h:
+
+../../../libs/poco/include/Poco/RegularExpression.h:
 
 ../../../libs/openFrameworks/app/ofAppBaseWindow.h:
 
@@ -1014,8 +1017,6 @@ src/SuperficieSinusoidalState.h:
 src/Sinusoidal.h:
 
 src/ElipsesConcentricasState.h:
-
-src/Elipse.h:
 
 src/CubetaHuevosState.h:
 

@@ -135,6 +135,7 @@ obj/linux64/Release/src/InitialState.o: src/InitialState.cpp \
  ../../../libs/openFrameworks/3d/of3dPrimitives.h \
  ../../../libs/openFrameworks/gl/ofMaterial.h \
  ../../../libs/openFrameworks/gl/ofShader.h \
+ ../../../libs/poco/include/Poco/RegularExpression.h \
  ../../../libs/openFrameworks/app/ofAppBaseWindow.h \
  ../../../libs/openFrameworks/gl/ofGLProgrammableRenderer.h \
  ../../../libs/openFrameworks/graphics/ofCairoRenderer.h \
@@ -594,6 +595,8 @@ src/State.h:
 ../../../libs/openFrameworks/gl/ofMaterial.h:
 
 ../../../libs/openFrameworks/gl/ofShader.h:
+
+../../../libs/poco/include/Poco/RegularExpression.h:
 
 ../../../libs/openFrameworks/app/ofAppBaseWindow.h:
 

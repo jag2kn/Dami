@@ -136,6 +136,7 @@ obj/linux64/Release/src/ElipsesConcentricasState.o: \
  ../../../libs/openFrameworks/3d/of3dPrimitives.h \
  ../../../libs/openFrameworks/gl/ofMaterial.h \
  ../../../libs/openFrameworks/gl/ofShader.h \
+ ../../../libs/poco/include/Poco/RegularExpression.h \
  ../../../libs/openFrameworks/app/ofAppBaseWindow.h \
  ../../../libs/openFrameworks/gl/ofGLProgrammableRenderer.h \
  ../../../libs/openFrameworks/graphics/ofCairoRenderer.h \
@@ -310,7 +311,7 @@ obj/linux64/Release/src/ElipsesConcentricasState.o: \
  ../../../libs/openFrameworks/video/ofGstVideoPlayer.h \
  ../../../libs/openFrameworks/3d/ofCamera.h \
  ../../../libs/openFrameworks/3d/ofEasyCam.h src/StateMachineApp.h \
- src/Elipse.h src/ParametricObject.h ../../../addons/ofxGui/src/ofxGui.h \
+ ../../../addons/ofxGui/src/ofxGui.h \
  ../../../addons/ofxGui/src/ofxToggle.h \
  ../../../addons/ofxGui/src/ofxBaseGui.h \
  ../../../addons/ofxGui/src/ofxSlider.h \
@@ -595,6 +596,8 @@ src/State.h:
 ../../../libs/openFrameworks/gl/ofMaterial.h:
 
 ../../../libs/openFrameworks/gl/ofShader.h:
+
+../../../libs/poco/include/Poco/RegularExpression.h:
 
 ../../../libs/openFrameworks/app/ofAppBaseWindow.h:
 
@@ -977,10 +980,6 @@ src/State.h:
 ../../../libs/openFrameworks/3d/ofEasyCam.h:
 
 src/StateMachineApp.h:
-
-src/Elipse.h:
-
-src/ParametricObject.h:
 
 ../../../addons/ofxGui/src/ofxGui.h:
 

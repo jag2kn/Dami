@@ -29,10 +29,8 @@ protected:
 	void in();
 	void out();
 	
-	ofEasyCam camara;
-	Torus							*torus;
 
-	int								direccioncolor;
+	int					direccioncolor;
 	float							delta;
 	ParametricObject::RenderMode	renderMode;
 };

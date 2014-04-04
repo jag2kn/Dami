@@ -7,9 +7,9 @@
 #include "ofxGui.h"
 #include "ofxPanel.h"
 
-class TransformationsState : public State {
+class CubetaHuevosState : public State {
 public:	
-	TransformationsState(StateMachineApp* app);
+	CubetaHuevosState(StateMachineApp* app);
 	
 	void setup();
 	void update();
@@ -29,8 +29,6 @@ protected:
 	void in();
 	void out();
 	
-	ofEasyCam camara;
-	Torus							*torus;
 
 	int								direccioncolor;
 	float							delta;
