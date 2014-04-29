@@ -25,5 +25,5 @@ void main(void)
 
 	float angle = dot(normal, lightDirection); 
 
-	gl_FragColor = gl_FrontMaterial.diffuse * angle; 
+	gl_FragColor = vec4(gl_FrontMaterial.diffuse.xyz * angle, 1.0); 
 } 

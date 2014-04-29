@@ -85,7 +85,8 @@ void ShadersState::draw(){
 			shader.begin(); 
 			shader.setUniform2f("size", ofGetWidth(), ofGetHeight());
 			shader.setUniform2f("center", ofGetMouseX(), ofGetMouseY()); 
-			shader.setUniform3f("lightPosition", ofGetMouseX(), ofGetMouseY(), 500);
+			shader.setUniform3f("lightPosition", ofGetMouseX(), ofGetMouseY(), 500);
+
 
 
 			shader.setUniform1f("radius", 100);
@@ -97,7 +98,10 @@ void ShadersState::draw(){
 
 		}
 		torus->draw(ofPoint(ofGetWidth() / 2, ofGetHeight() / 2, -100), this->ambient, this->diffuse, this->specular, shininess, renderMode); 
-		if(shade){			shader.end(); 		}	}
+		if(shade){
+			shader.end(); 
+		}
+	}
 	glPopMatrix();
 
 
